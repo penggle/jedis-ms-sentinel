@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	debug="true" 	启动时输出配置加载信息
+	scan="true" 	默认每分钟自动扫描
+	scanPeriod="30 seconds" 	设置每30秒自动扫描,若没有指定具体单位则以milliseconds为标准(单位:milliseconds, seconds, minutes or hours)
+-->
+<configuration scan="true" scanPeriod="120 seconds">
+    <contextName>tutorialsRedisLogger</contextName>
+
+    <!--tomcat webapps路径-->
+    <property name="logback.logs.path" value="D:/logs/"/>
+    <!--项目名-->
+    <property name="logback.project.name" value="tutorials-Redis"/>
+
+    <timestamp key="byDay" datePattern="yyyyMMdd"/>
+
+    <!--appender 模块-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>%date [%thread] %-5level %logger#%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logback.logs.path}${logback.project.name}_log_%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%date [%thread] %-5level %logger#%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache.commons" level="ERROR"/>
+    <logger name="org.apache.http" level="DEBUG"/>
+	<logger name="org.springframework" level="INFO"/>
+	
+    <logger name="com.penglecode" level="DEBUG"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+</configuration>
