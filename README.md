@@ -7,7 +7,7 @@ It can provide master-slave redundancy、failover by redis-sentinel、sharding a
 1、Master-Slaves no sharding
 	
 	
-
+![image](https://raw.githubusercontent.com/penggle/jedis-ms-sentinel/master/architecture/MasterSlaveSetinelPool.jpg)
 
 	Set<String> sentinels = new LinkedHashSet<String>();
 	sentinels.add("192.168.137.101:63791");
@@ -36,6 +36,8 @@ It can provide master-slave redundancy、failover by redis-sentinel、sharding a
 
 2、Master-Slaves with sharding
 	
+![image](https://raw.githubusercontent.com/penggle/jedis-ms-sentinel/master/architecture/ShardedMasterSlaveSetinelPool.jpg)
+
 	master-1 : master=192.168.137.101:6379 slaves=[192.168.137.101:6380, 192.168.137.101:6381]
 	master-2 : master=192.168.137.101:6382 slaves=[192.168.137.101:6383, 192.168.137.101:6384]
 
