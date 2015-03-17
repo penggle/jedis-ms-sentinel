@@ -1,10 +1,13 @@
 jedis-ms-sentinel
 =================
 
-This is a Redis Master-Slave framework based jedis client.
+This is a Redis Master-Slave system architecture based jedis client.
 It can provide master-slave redundancy、failover by redis-sentinel、sharding and so on.
 
-1、Master-Slave no sharding
+1、Master-Slaves no sharding
+	
+	
+
 
 	Set<String> sentinels = new LinkedHashSet<String>();
 	sentinels.add("192.168.137.101:63791");
@@ -31,7 +34,7 @@ It can provide master-slave redundancy、failover by redis-sentinel、sharding a
 
 	masterSlaveJedisPool.returnResource(masterSlaveJedis);
 
-2、Master-Slave with sharding
+2、Master-Slaves with sharding
 	
 	master-1 : master=192.168.137.101:6379 slaves=[192.168.137.101:6380, 192.168.137.101:6381]
 	master-2 : master=192.168.137.101:6382 slaves=[192.168.137.101:6383, 192.168.137.101:6384]
