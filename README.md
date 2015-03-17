@@ -23,7 +23,7 @@ It can provide master-slave redundancy、failover by redis-sentinel、sharding a
 	LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(200));
 	
 	String slaveHolder1 = "myslave1";
-	Jedis slave1 = masterSlaveJedis.opsForSlave(slaveHolder);
+	Jedis slave1 = masterSlaveJedis.opsForSlave(slaveHolder); // if no any slave found, opsForSlave() will return master as a slave to be use
 	System.out.println(">>> nowTime = " + slave1.get("nowTime")); //>>> nowTime = 2015-03-16 15:34:55
 
 	String slaveHolder2 = "myslave1";
