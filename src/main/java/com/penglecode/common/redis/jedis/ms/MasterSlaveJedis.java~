@@ -112,13 +112,16 @@ public class MasterSlaveJedis extends Sharded<Jedis, JedisShardInfo> implements 
 	 * @return					- 返回从Jedis
 	 */
 	public Jedis opsForSlave(String ... slaveHolder) {
-
-		if(connectionDesc.getSlaves() == null || connectionDesc.getSlaves().size() == 0) {
-			return this.master;
+		String holder = null;
+		if(slaveHolder == null || slaveHolder.length == 0){
+			holder = String.valueOf(System.currentTimeMillis());
+		}else{
+			holder = slaveHolder[0];
+			if(holder == null || holder.trim().equals("")){
+				holder = String.valueOf(System.currentTimeMillis());
+			}
 		}
-		Object[] slaves = connectionDesc.getSlaves().toArray();
-		HostAndPort slave = (HostAndPort) slaves[new Random().nextInt(slaves.length)];
-		return new Jedis(slave.getHost(), slave.getPort());
+		return getShard(holder);
 	}
 	
 	public MasterSlaveHostAndPort getConnectionDesc() {
